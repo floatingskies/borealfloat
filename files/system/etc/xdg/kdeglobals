@@ -1,0 +1,10 @@
+# Borealfloat: default KDE Plasma font settings (Intel One Mono interface font,
+# mirroring Floatfin's GNOME defaults). Read via XDG config cascade at login;
+# per-user Settings changes still win.
+
+[General]
+font=Intel One Mono,12,-1,5,50,0,0,0,0,0,0,0,0,0,0,1
+fixed=Intel One Mono,12,-1,5,50,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Intel One Mono,10,-1,5,50,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Intel One Mono,12,-1,5,50,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Intel One Mono,12,-1,5,50,0,0,0,0,0,0,0,0,0,0,1

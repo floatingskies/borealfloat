@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/module-stage-list-v1.json
+
+# Steam client from negativo17. Aurora does not ship it (Bazzite does), so this
+# feature mirrors what the Floatfin Bluefin image does for GNOME.
+modules:
+  - type: dnf
+    repos:
+      nonfree: negativo17
+    install:
+      packages:
+        - steam
