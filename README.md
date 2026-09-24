@@ -53,6 +53,12 @@ logo instead of Aurora's welcome banner. Branding shows up in Settings, where
 it says Borealis and points at this repository. Docker and Tailscale stay
 disabled by default, as does Starship.
 
+System sounds are the classic Borealis theme from 2004, by Ivica Ico Bukvic,
+the most downloaded sound theme in KDE history and the one MX Linux made
+famous. It is set as the default in System Settings, so the login and logout
+chimes and the desktop notifications all play it. The theme ships in the
+image, so nothing is downloaded when it plays.
+
 The image also carries a docker-ops style CLI toolkit comparable to what the
 plain Aurora DX offers: gh, ansible-core, git-lfs, jq, ripgrep, fzf, btop, htop,
 tmux, nodejs, python, and a few more. Nothing exotic, just handy.

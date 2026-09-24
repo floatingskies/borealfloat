@@ -13,3 +13,9 @@ menuFont=Intel One Mono,12,-1,5,50,0,0,0,0,0,0,0,0,0,0,1
 # 0.5x animation duration: keeps the animations (they still look smooth) but
 # makes the UI feel snappier, especially on older hardware.
 AnimationDurationFactor=0.5
+
+[Sounds]
+# Classic KDE "Borealis" theme (2004, by Ivica Ico Bukvic): the login/logout
+# and system sounds many older Linux desktops used. Ships at
+# /usr/share/sounds/Borealis/, resolved via the freedesktop sound naming spec.
+Theme=Borealis
