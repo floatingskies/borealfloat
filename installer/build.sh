@@ -9,7 +9,6 @@ set -exo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_IMAGE=${BASE_IMAGE:?}
 INSTALL_IMAGE_PAYLOAD=${INSTALL_IMAGE_PAYLOAD:?}
-ISO_LABEL=${ISO_LABEL:-Borealfloat-Live}
 
 # Create the directory that /root is symlinked to
 mkdir -p "$(realpath /root)"
@@ -138,20 +137,9 @@ WantedBy=multi-user.target
 EOF
 systemctl enable var-lib-flatpak.mount
 
-# Copy in the iso config for image-builder
+# Copy in the iso config (GRUB entries + volume label) for image-builder
 mkdir -p /usr/lib/bootc-image-builder
-cat >/usr/lib/bootc-image-builder/iso.yaml <<EOF
-label: "$ISO_LABEL"
-grub2:
-  timeout: 3
-  entries:
-    - name: "Launch Borealfloat Installer"
-      linux: "/images/pxeboot/vmlinuz quiet rhgb root=live:CDLABEL=$ISO_LABEL enforcing=0 rd.live.image"
-      initrd: "/images/pxeboot/initrd.img"
-    - name: "Launch Borealfloat Installer (Basic Graphics Mode)"
-      linux: "/images/pxeboot/vmlinuz quiet rhgb root=live:CDLABEL=$ISO_LABEL enforcing=0 rd.live.image nomodeset"
-      initrd: "/images/pxeboot/initrd.img"
-EOF
+cp /src/iso.yaml /usr/lib/bootc-image-builder/iso.yaml
 
 # Clean up dnf cache to save space
 dnf clean all

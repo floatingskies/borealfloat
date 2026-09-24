@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/module-stage-list-v1.json
+
+# Default Flatpaks, installed at first boot (Bluefin-style managed list, see
+# files/flatpaks/). The live ISO boots this same image, so the Flatpaks also
+# show up in the live session and on every installed system's first boot.
+modules:
+  - type: files
+    files:
+      - source: flatpaks/etc/flatpak/install
+        destination: /etc/flatpak/install
+      - source: flatpaks/usr/libexec/borealis-flatpak-manager.sh
+        destination: /usr/libexec/borealis-flatpak-manager.sh
+      - source: flatpaks/usr/libexec/borealis-flatpaks-notify.sh
+        destination: /usr/libexec/borealis-flatpaks-notify.sh
+      - source: flatpaks/etc/xdg/autostart/borealis-flatpaks-notify.desktop
+        destination: /etc/xdg/autostart/borealis-flatpaks-notify.desktop
+      - source: flatpaks/usr/lib/systemd/system/borealis-flatpak-manager.service
+        destination: /usr/lib/systemd/system/borealis-flatpak-manager.service
+
+  - type: systemd
+    system:
+      enabled:
+        - borealis-flatpak-manager.service

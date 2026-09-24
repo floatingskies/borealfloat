@@ -34,16 +34,16 @@ imagetag="${PAYLOAD_IMAGETAG:-$(podman images --format '{{ .Tag }}\n' "$imageref
 imagetag="${imagetag##*:}"
 sbkey='https://github.com/ublue-os/akmods/raw/main/certs/public_key.der'
 SECUREBOOT_KEY="/usr/share/ublue-os/sb_pubkey.der"
-SECUREBOOT_DOC_URL="https://docs.bazzite.gg/sb"
+SECUREBOOT_DOC_URL="https://github.com/ublue-os/akmods"
 SECUREBOOT_DOC_URL_QR="/usr/share/ublue-os/secure_boot_qr.png"
 
 # Anaconda profile
 : ${VARIANT_ID:=$ID}
 
 if [[ -n "${VERSION_CODENAME:-}" ]]; then
-    echo "borealfloat release $VERSION_ID ($VERSION_CODENAME)" >/etc/system-release
+    echo "borealis release $VERSION_ID ($VERSION_CODENAME)" >/etc/system-release
 else
-    echo "borealfloat release $VERSION_ID" >/etc/system-release
+    echo "borealis release $VERSION_ID" >/etc/system-release
 fi
 
 # Secureboot Key Fetch
@@ -102,7 +102,7 @@ if [[ -z \$xboot_dev ]]; then
   echo "ERROR: xboot_dev not found"
   exit 1
 fi
-e2label "\$xboot_dev" "ublue_xboot"
+e2label "\$xboot_dev" "borealis_xboot"
 %end
 
 # Open a dialog with the installation logs

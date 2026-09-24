@@ -7,15 +7,15 @@ set -euo pipefail
 #
 # KDE only lists wallpapers that are packaged in /usr/share/wallpapers/<Id>/ with
 # a metadata.json (like kde-wallpapers / plasma-workspace-wallpapers do); bare
-# files dumped into /usr/share/backgrounds are ignored by the picker. Collections
-# that are copied in flat (Ubuntu, System76, Framework, floating-*) therefore
-# need one package per image.
+# files dumped into /usr/share/backgrounds are ignored by the picker. The
+# collections Borealis ships flat (Auveiss-Modified, Nature) therefore need one
+# package per image.
 #
 # Usage:
 #   register-plasma-wallpapers.sh <wallpaper-dir> <collection-id>
 #
 #   wallpaper-dir  directory to scan for images (flat, non-recursive)
-#   collection-id  short id used as the package prefix, e.g. "floating-skies"
+#   collection-id  short id used as the package prefix, e.g. "auveiss-modified"
 
 src="${1:?usage: $0 <wallpaper-dir> <collection-id>}"
 collection="${2:?usage: $0 <wallpaper-dir> <collection-id>}"

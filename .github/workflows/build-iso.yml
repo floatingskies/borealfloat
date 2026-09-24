@@ -19,13 +19,15 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
+      attestations: write
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: borealfloat
+          - name: borealis
             tag: stable
-            label: Borealfloat-Live
+            label: Borealis-Live
     steps:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
@@ -58,7 +60,7 @@ jobs:
       - name: Build Container Image
         run: |
           IMAGE="ghcr.io/${{ steps.repo_owner_case.outputs.lowercase }}/${{ matrix.name }}:${{ matrix.tag }}"
-          CACHE_REPO="ghcr.io/${{ steps.repo_owner_case.outputs.lowercase }}/borealfloat-iso-cache-${{ matrix.name }}"
+          CACHE_REPO="ghcr.io/${{ steps.repo_owner_case.outputs.lowercase }}/borealis-iso-cache-${{ matrix.name }}"
           echo "${{ github.token }}" | sudo podman login ghcr.io -u "${{ github.actor }}" --password-stdin
           # note: buildah's cache flags take a bare repository reference (no
           # tag/digest and no BuildKit "type=registry,ref=...,mode=max" syntax),
@@ -70,7 +72,6 @@ jobs:
             --cache-to "$CACHE_REPO" \
             --build-arg BASE_IMAGE="$IMAGE" \
             --build-arg INSTALL_IMAGE_PAYLOAD="$IMAGE" \
-            --build-arg ISO_LABEL="${{ matrix.label }}" \
             -t localhost/payload:latest installer/
 
       - name: Show disk space
@@ -100,6 +101,40 @@ jobs:
           mv ${ISO_PATH} ${ISO_UPLOAD_DIR}
           (cd ${ISO_UPLOAD_DIR} && sha256sum ${ISO_NAME} | tee ${ISO_NAME}-CHECKSUM)
           echo "iso-upload-dir=${ISO_UPLOAD_DIR}" >> $GITHUB_OUTPUT
+
+      - name: Setup Cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        with:
+          cosign-release: 'v2.6.5'
+
+      - name: Sign ISO
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_SECRET }}
+          ISO_UPLOAD_DIR: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+        run: |
+          for iso in ${ISO_UPLOAD_DIR}/*.iso; do
+            cosign sign-blob -y --key env://SIGNING_KEY "$iso" --output-signature "${iso}.sig"
+          done
+
+      - name: Attest Build Provenance
+        id: attest
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4
+        with:
+          subject-path: ${{ steps.upload-directory.outputs.iso-upload-dir }}/*.iso
+
+      - name: Generate ISO Metadata JSON
+        env:
+          ISO_UPLOAD_DIR: ${{ steps.upload-directory.outputs.iso-upload-dir }}
+          ATTESTATION_URL: ${{ steps.attest.outputs.attestation-url }}
+        run: |
+          for iso in ${ISO_UPLOAD_DIR}/*.iso; do
+            iso_name=$(basename "$iso")
+            jq -n \
+              --arg iso "$iso_name" \
+              --arg url "$ATTESTATION_URL" \
+              --arg date "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+              '{iso: $iso, attestation_url: $url, build_date: $date}' > "${iso}.json"
+          done
 
       - name: Upload ISOs and Checksum to Job Artifacts
         uses: actions/upload-artifact@v4
@@ -139,7 +174,7 @@ jobs:
           {
             echo "Live desktop ISOs built automatically from the \`main\` branch."
             echo
-            echo "Each ISO boots into the full desktop from the image and can install it to disk with the on-screen **Install to Disk** (Anaconda) launcher. Secure Boot is supported via the Universal Blue enrollment key."
+            echo "Each ISO boots into the full Borealis desktop from the image and can install it to disk with the on-screen **Install to Disk** (Anaconda) launcher. Secure Boot is supported via the Universal Blue enrollment key."
             echo
             echo "## What changed since the previous ISO"
             PREV=$(gh release view iso-latest --json tagName -q '.tagName' 2>/dev/null || true)
@@ -157,7 +192,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: iso-latest
-          name: Borealfloat Live ISO (latest)
+          name: Borealis Live ISO (latest)
           make_latest: true
           overwrite: true
           fail_on_unmatched_files: true
@@ -165,3 +200,5 @@ jobs:
           files: |
             isos/*.iso
             isos/*-CHECKSUM
+            isos/*.sig
+            isos/*.json

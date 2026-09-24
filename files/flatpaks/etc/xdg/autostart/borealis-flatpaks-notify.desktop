@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Borealis apps
+Comment=Notify once when the first-boot apps finished installing
+Exec=/usr/libexec/borealis-flatpaks-notify.sh
+Terminal=false
+NoDisplay=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

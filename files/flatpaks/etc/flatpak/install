@@ -1,0 +1,13 @@
+# Borealis default Flatpaks. One app-id per line; lines starting with '#'
+# (or anything after a '#') are ignored. First boot of the live ISO and of
+# every freshly installed system installs these from Flathub automatically
+# (see /usr/libexec/borealis-flatpak-manager.sh).
+#
+# Nothing here is baked into the image, so apps can be updated on the live
+# system without rebasing. Add or remove entries freely.
+
+# Permissions manager for the other Flatpaks (handy for tinkerers).
+com.github.tchx84.Flatseal
+
+# Video player that plays anything out of the box.
+org.videolan.VLC

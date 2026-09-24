@@ -9,10 +9,7 @@ modules:
 
   - type: script
     scripts:
-      # Download, flatten and register extra collections with the Plasma
-      # wallpaper picker (/usr/share/wallpapers/<Collection>/...metadata.json).
-      - install-ubuntu-wallpapers.sh
-      - install-system76-wallpaper.sh
-      - install-framework-wallpaper.sh
-      - install-floating-woof.sh
-      - install-floating-skies.sh
+      # Borealis' own collections (Auveiss-Modified, Nature) are baked into the
+      # image — no network downloads, so the build can't break on a vendor URL
+      # going away. Register them with the Plasma wallpaper picker.
+      - install-borealis-wallpapers.sh

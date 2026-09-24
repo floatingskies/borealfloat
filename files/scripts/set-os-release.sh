@@ -1,20 +1,15 @@
 #!/usr/bin/bash
 set -euo pipefail
 
-# Rewrites /usr/lib/os-release so the OS identifies itself as Borealfloat
+# Rewrites /usr/lib/os-release so the OS identifies itself as Borealis
 # everywhere: Settings -> About, the live-ISO installer branding, CPE_NAME,
 # DEFAULT_HOSTNAME and so on. The output follows the same structure Universal
 # Blue's Aurora uses.
 #
-# The flavor is detected from the base image's own os-release ID, so this file
-# keeps working through base-image and Fedora version bumps with no edits:
-#
-#   base ID is aurora   -> "Borealfloat"
-#   anything else       -> "Borealfloat"
-#
-# Fields that describe the underlying OS (VERSION_ID, VERSION_CODENAME,
-# VARIANT, SUPPORT_END, ...) are preserved from the base image, which keeps
-# the file correct when the recipes move between Fedora releases.
+# The flavor is always Borealis; the fields that describe the underlying OS
+# (VERSION_ID, VERSION_CODENAME, VARIANT, SUPPORT_END, ...) are preserved from
+# the base image, which keeps this file correct when the recipes move between
+# Fedora releases.
 #
 # Overridable via the environment: IMAGE_NAME, IMAGE_ID, IMAGE_HOSTNAME,
 # IMAGE_HOME_URL, IMAGE_DOCUMENTATION_URL, IMAGE_SUPPORT_URL,
@@ -39,19 +34,15 @@ BASE_VARIANT="$(get_kv VARIANT)"
 BASE_VARIANT_ID="$(get_kv VARIANT_ID)"
 BASE_SUPPORT_END="$(get_kv SUPPORT_END)"
 
-case "$BASE_ID" in
-    *)
-        IMAGE_NAME="${IMAGE_NAME:-Borealfloat}"
-        IMAGE_ID="${IMAGE_ID:-borealfloat}"
-        IMAGE_HOSTNAME="${IMAGE_HOSTNAME:-borealfloat}"
-        ;;
-esac
+IMAGE_NAME="${IMAGE_NAME:-Borealis}"
+IMAGE_ID="${IMAGE_ID:-borealis}"
+IMAGE_HOSTNAME="${IMAGE_HOSTNAME:-borealis}"
 
 RELEASE_TYPE="${RELEASE_TYPE:-stable}"
-IMAGE_HOME_URL="${IMAGE_HOME_URL:-https://github.com/floatingskies/borealfloat}"
-IMAGE_DOCUMENTATION_URL="${IMAGE_DOCUMENTATION_URL:-https://github.com/floatingskies/borealfloat#readme}"
-IMAGE_SUPPORT_URL="${IMAGE_SUPPORT_URL:-https://github.com/floatingskies/borealfloat/issues}"
-IMAGE_BUG_REPORT_URL="${IMAGE_BUG_REPORT_URL:-https://github.com/floatingskies/borealfloat/issues}"
+IMAGE_HOME_URL="${IMAGE_HOME_URL:-https://github.com/floatingskies/borealis}"
+IMAGE_DOCUMENTATION_URL="${IMAGE_DOCUMENTATION_URL:-https://github.com/floatingskies/borealis#readme}"
+IMAGE_SUPPORT_URL="${IMAGE_SUPPORT_URL:-https://github.com/floatingskies/borealis/issues}"
+IMAGE_BUG_REPORT_URL="${IMAGE_BUG_REPORT_URL:-https://github.com/floatingskies/borealis/issues}"
 
 # Aurora-style build stamp: <channel>-<v>.YYYYMMDD.1
 VERSION="$RELEASE_TYPE-$BASE_VERSION_ID.$(date -u +%Y%m%d).1"

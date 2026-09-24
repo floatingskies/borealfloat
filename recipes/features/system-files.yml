@@ -2,12 +2,11 @@
 modules:
   - type: signing
   - type: files
+    # Ship everything under files/system/ into the root of the image.
     files:
       - source: system
         destination: /
   - type: script
-    # Rewrite /usr/lib/os-release with Borealfloat branding
-    # (the flavor is auto-detected from the base image).
+    # Replace Aurora's login banner with the lean Borealis fastfetch greeting.
     scripts:
-      - set-os-release.sh
       - disable-ublue-motd.sh

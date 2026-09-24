@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: borealis
+# description will be included in the image's metadata
+description: Borealis - Aurora DX (KDE Plasma 6) rebuilt for people who love to tinker without giving up ease of use, and tuned to run great on older hardware. This bootable container follows Aurora's stable image channel.
+alt-tags:
+  - stable
+  - stable-weekly
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/aurora-dx
+image-version: stable
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - from-file: features/system-files.yml
+  - from-file: features/application-rpms.yml
+  - from-file: features/devops.yml
+  - from-file: features/kde.yml
+  - from-file: features/steam.yml
+  - from-file: features/flatpaks.yml
+  - from-file: features/fonts.yml
+  - from-file: features/wallpapers.yml
+  - from-file: features/aurora-overrides.yml
+  - type: script
+    env:
+      RELEASE_TYPE: stable
+      UBLUE_WALLPAPER: snowy husklamute.jpg
+    scripts:
+      - set-os-release.sh
+      - set-default-wallpaper.sh

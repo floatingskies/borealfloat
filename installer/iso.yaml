@@ -1,0 +1,10 @@
+label: "Borealis-Live"
+grub2:
+  timeout: 3
+  entries:
+    - name: "Launch Borealis Installer"
+      linux: "/images/pxeboot/vmlinuz quiet rhgb root=live:CDLABEL=Borealis-Live enforcing=0 rd.live.image"
+      initrd: "/images/pxeboot/initrd.img"
+    - name: "Launch Borealis Installer (Basic Graphics Mode)"
+      linux: "/images/pxeboot/vmlinuz quiet rhgb root=live:CDLABEL=Borealis-Live enforcing=0 rd.live.image nomodeset"
+      initrd: "/images/pxeboot/initrd.img"

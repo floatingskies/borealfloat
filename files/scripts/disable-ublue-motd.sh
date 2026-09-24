@@ -8,9 +8,9 @@ set -eou pipefail
 # Aurora's banner is "uwelcome" (launched from /etc/profile.d/uwelcome.sh and
 # from the base fish greeting); older ublue-motd installs are cleaned up too.
 #
-# The Borealfloat fish greeting (/usr/share/fish/vendor_conf.d/fish_greeting.fish)
+# The Borealis fish greeting (/usr/share/fish/vendor_conf.d/fish_greeting.fish)
 # is shipped separately and intentionally left alone: it drops the banner and
-# runs `ublue-fastfetch` (with the foxy.png logo) as a lean system summary.
+# runs `ublue-fastfetch` (with the borealis.txt logo) as a lean system summary.
 rm -f /etc/profile.d/uwelcome.sh
 rm -f /etc/profile.d/user-motd.sh
 rm -f /etc/profile.d/ublue-motd.sh

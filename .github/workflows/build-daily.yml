@@ -1,14 +1,14 @@
 name: Daily Image Builds
 on:
   schedule:
-    - cron: "00 7 * * *" # build at 7:00 UTC every day 
+    - cron: "00 7 * * *" # build at 7:00 UTC every day
                           # (ublue images start building at 05:04 UTC)
   push:
     paths-ignore: # don't rebuild if only stuff the workflow doesn't run has changed
       - "**.md"
       - "/*.sh"
-      - "iso-config/**"
-      
+      - "installer/**"
+
   pull_request:
   workflow_dispatch: # allow manually triggering builds
 
@@ -28,8 +28,8 @@ jobs:
       fail-fast: false # stop GH from cancelling all matrix builds if one fails
       matrix:
         recipe:
-          # !! Add your recipes here 
-          - borealfloat-latest.yml
+          # !! Add your recipes here
+          - borealis-latest.yml
     steps:
        # the build is fully handled by the reusable github action
       - name: Build Custom Image

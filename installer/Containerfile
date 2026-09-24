@@ -1,17 +1,18 @@
-# run with --cap-add sys_admin --security-opt label=disable
+# Run with --cap-add sys_admin --security-opt label=disable.
+# Mirrors the universal blue (bazzite/aurora) installer Containerfile.
+#
+# BASE_IMAGE          : the image the live session boots from
+# INSTALL_IMAGE_PAYLOAD: the image anaconda installs to disk
+# Both default to the stable Borealis image.
 
-ARG BASE_IMAGE=${BASE_IMAGE:-ghcr.io/floatingskies/borealfloat:stable}
-ARG INSTALL_IMAGE_PAYLOAD=${INSTALL_IMAGE_PAYLOAD:-ghcr.io/floatingskies/borealfloat:stable}
-ARG ISO_LABEL=${ISO_LABEL:-Borealfloat-Live}
-
+ARG BASE_IMAGE=${BASE_IMAGE:-ghcr.io/floatingskies/borealis:stable}
+ARG INSTALL_IMAGE_PAYLOAD=${INSTALL_IMAGE_PAYLOAD:-ghcr.io/floatingskies/borealis:stable}
 
 FROM $BASE_IMAGE
 ARG BASE_IMAGE
 ARG INSTALL_IMAGE_PAYLOAD
-ARG ISO_LABEL
 RUN --mount=type=bind,source=./.,target=/src \
     env \
     BASE_IMAGE="$BASE_IMAGE" \
     INSTALL_IMAGE_PAYLOAD="$INSTALL_IMAGE_PAYLOAD" \
-    ISO_LABEL="$ISO_LABEL" \
     /src/build.sh

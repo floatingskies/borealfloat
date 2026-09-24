@@ -9,3 +9,7 @@ modules:
     install:
       packages:
         - steam
+
+  - type: script
+    scripts:
+      - disable-steam-autostart.sh

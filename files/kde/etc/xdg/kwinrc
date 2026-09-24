@@ -1,0 +1,12 @@
+# Borealis: performance-minded KWin/Plasma compositing defaults.
+#
+# Read via the XDG config cascade at login; per-user System Settings changes
+# still win. These keep the compositor fast on older hardware while keeping
+# its visuals intact (blur and shadows stay enabled).
+
+[Compositing]
+# Prefer the OpenGL core profile; faster and less bug-prone on modern Mesa.
+GLCore=true
+# We ship on Mesa/Fedora stack without the software-rendering pitfalls that
+# used to make this unsafe, so let KWin take the fast path.
+OpenGLIsUnsafe=false
