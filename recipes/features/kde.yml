@@ -1,8 +1,11 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-stage-list-v1.json
 modules:
   - type: files
-    # KDE Plasma performance & polish. The config file lives in this feature's
+    # KDE Plasma performance & polish. The config files live in this feature's
     # own tree (files/kde/) while everything else ships via system-files.yml.
     files:
       - source: kde/etc/xdg/kwinrc
         destination: /etc/xdg/kwinrc
+      # Login-screen wallpaper (Plasma Login Manager on Fedora 44+).
+      - source: kde/etc/plasmalogin.conf
+        destination: /etc/plasmalogin.conf

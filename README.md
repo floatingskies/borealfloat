@@ -29,11 +29,13 @@ older hardware that is still perfectly good**.
 ## What is baked in
 
 - **Default wallpaper** — `snowy husklamute.jpg` (from the baked-in
-  `Auveiss-Modified` collection). The default is applied exactly once on first
-  login, so you can change it freely afterwards. The `Auveiss-Modified` and
-  `Nature` collections are shipped **inside the image** (no build-time
-  downloads) and appear in the Plasma wallpaper picker. Third-party vendor
-  wallpaper packs (Ubuntu/Canonical, System76, Framework) are **not** included.
+  `Auveiss-Modified` collection). It is applied exactly once on first login, so
+  you can change it freely afterwards, and it also themes the **login screen**
+  (Plasma Login Manager) so the base Aurora wallpaper never shows. The
+  `Auveiss-Modified` and `Nature` collections are shipped **inside the image**
+  (no build-time downloads) and appear in the Plasma wallpaper picker. Third-party
+  vendor wallpaper packs (Ubuntu/Canonical, System76, Framework) are **not**
+  included.
 - **Firefox** as the default browser (RPM).
 - **Intel One Mono** as the default interface font, matching Floatfin on GNOME.
 - **Steam** from negativo17 (with autostart disabled).
