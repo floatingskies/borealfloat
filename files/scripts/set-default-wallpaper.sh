@@ -13,7 +13,7 @@ set -euo pipefail
 # so users can change it afterwards without it being reset.
 
 wallpaper="${UBLUE_WALLPAPER:?UBLUE_WALLPAPER env var is required}"
-wall="$(find /usr/share/backgrounds -type f \( -path '*/Auveiss-Modified/*' -o -path '*/Nature/*' \) -iname "${wallpaper}" -print -quit 2>/dev/null || true)"
+wall="$(find /usr/share/backgrounds -type f -path '*/Borealis/*' -iname "${wallpaper}" -print -quit 2>/dev/null || true)"
 if [[ -z "${wall}" ]]; then
     echo "error: wallpaper '${wallpaper}' not found under /usr/share/backgrounds" >&2
     exit 1
