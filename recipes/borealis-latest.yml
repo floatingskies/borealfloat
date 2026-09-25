@@ -24,7 +24,7 @@ modules:
   - type: script
     env:
       RELEASE_TYPE: latest
-      UBLUE_WALLPAPER: snowy husklamute.jpg
+      UBLUE_WALLPAPER: borealis-snow-forest.jpg
     scripts:
       - set-os-release.sh
       - set-default-wallpaper.sh
