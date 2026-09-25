@@ -29,7 +29,7 @@ The guiding priorities, in order, are:
 
 ## What is baked in
 
-The desktop wallpaper is `snowy husklamute.jpg`, from the `Auveiss-Modified`
+The desktop wallpaper is `borealis-fire-forest.jpg`, from the `Borealis`
 collection that ships inside the image. It shows up exactly once on first login,
 so you can change it freely afterwards, and the same artwork is used on the
 login screen, so you never see the base Aurora wallpaper during boot. The
