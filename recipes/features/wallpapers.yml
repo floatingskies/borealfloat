@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-stage-list-v1.json
 modules:
   - type: dnf
-    install:
-      remove:
+    remove:
+      packages:
         # KDE/Plasma wallpaper collections (historic KDE + modern Plasma)
         - kde-wallpapers
         - plasma-workspace-wallpapers
