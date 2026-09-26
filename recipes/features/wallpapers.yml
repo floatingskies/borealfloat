@@ -2,14 +2,15 @@
 modules:
   - type: dnf
     install:
-      packages:
+      remove:
         # KDE/Plasma wallpaper collections (historic KDE + modern Plasma)
         - kde-wallpapers
         - plasma-workspace-wallpapers
+        - aurora-wallpapers
 
   - type: script
     scripts:
-      # Borealis' own collections (Auveiss-Modified, Nature) are baked into the
+      # Borealis' own collections (Borealis) are baked into the
       # image — no network downloads, so the build can't break on a vendor URL
       # going away. Register them with the Plasma wallpaper picker.
       - install-borealis-wallpapers.sh
