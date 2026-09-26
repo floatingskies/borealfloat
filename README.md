@@ -33,7 +33,7 @@ The desktop wallpaper is `borealis-fire-forest.jpg`, from the `Borealis`
 collection that ships inside the image. It shows up exactly once on first login,
 so you can change it freely afterwards, and the same artwork is used on the
 login screen, so you never see the base Aurora wallpaper during boot. The
-`Auveiss-Modified` and `Nature` collections are baked into the image with no
+`Borealis` collections are baked into the image with no
 build time downloads and show up in the normal Plasma wallpaper picker. I
 deliberately removed the Ubuntu, System76 and Framework wallpaper packs that the
 fork this started from shipped.
